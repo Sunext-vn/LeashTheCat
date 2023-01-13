@@ -40,6 +40,7 @@ public class MainCommand implements TabExecutor {
                     case "reload":
                         if (permissionSystem.isHavePermission(sender, PathManager.RELOAD_PERMISSION)) {
                             plugin.getPathManager().register();
+                            plugin.getItemManager().register();
 
                             messageSystem.sendPrefixMessage(sender, PathManager.RELOAD_MESSAGE);
                         } else {
