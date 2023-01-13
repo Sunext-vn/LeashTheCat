@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
+import org.jetbrains.annotations.NotNull;
 import vn.sunext.leashthecat.LeashTheCat;
 
 @Getter
@@ -19,7 +20,7 @@ public class AddPointEvent extends Event implements Cancellable {
     private final Integer currentLeashPoints;
     private final Integer nextLeashPoints;
 
-    private Boolean cancelled;
+    private Boolean cancelled = false;
 
     public AddPointEvent(Player player, Integer currentLeashPoints, Integer nextLeashPoints) {
         this.player = player;
@@ -38,7 +39,11 @@ public class AddPointEvent extends Event implements Cancellable {
     }
 
     @Override
-    public HandlerList getHandlers() {
+    public @NotNull HandlerList getHandlers() {
+        return handlers;
+    }
+
+    public static HandlerList getHandlerList() {
         return handlers;
     }
 }

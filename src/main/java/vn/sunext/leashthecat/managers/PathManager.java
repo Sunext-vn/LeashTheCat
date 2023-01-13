@@ -34,7 +34,10 @@ public class PathManager {
     public static Boolean ITEM_LEASH_MATERIAL_GLOW = false;
     public static List<String> ITEM_LEASH_MATERIAL_LORE = new ArrayList<>();
 
+    public static String NO_PERMISSION = "";
     public static String RELOAD_MESSAGE = "";
+    public static String REFRESH_MESSAGE = "";
+    public static String RECEIVED_POINT_MESSAGE = "";
     public static String FIRST_TOP_ONE_MESSAGE = "";
     public static String NEW_TOP_ONE_MESSAGE = "";
 
@@ -68,9 +71,12 @@ public class PathManager {
         ITEM_LEASH_MATERIAL_GLOW = config.getBoolean("items.leash-material.glow");
         ITEM_LEASH_MATERIAL_LORE = config.getStringList("items.leash-material.lore");
 
+        NO_PERMISSION = config.getString("messages.no-permission");
         RELOAD_MESSAGE = config.getString("messages.reloaded");
-        FIRST_TOP_ONE_MESSAGE = config.getString("messages.firstTopOne");
-        NEW_TOP_ONE_MESSAGE = config.getString("messages.newTopOne");
+        REFRESH_MESSAGE = config.getString("messages.refresh");
+        RECEIVED_POINT_MESSAGE = config.getString("messages.received-point");
+        FIRST_TOP_ONE_MESSAGE = config.getString("messages.first-top-one");
+        NEW_TOP_ONE_MESSAGE = config.getString("messages.new-top-one");
     }
 
 }

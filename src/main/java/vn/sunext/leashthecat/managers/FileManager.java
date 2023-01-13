@@ -7,8 +7,8 @@ import vn.sunext.leashthecat.LeashTheCat;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 public class FileManager {
 
@@ -20,22 +20,22 @@ public class FileManager {
 
     @SneakyThrows
     private void loadFile(String fileName) {
-        File database_file = new File(plugin.getDataFolder(), fileName);
+        File file = new File(plugin.getDataFolder(), fileName);
 
-        if (!database_file.exists())
-            database_file.createNewFile();
+        if (!file.exists())
+            file.createNewFile();
     }
 
-    public void setDataInDatabase(String fileName, String key, Object value) {
+    public void setDataInFile(String fileName, String key, Object value) {
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
 
-            File database_file = new File(plugin.getDataFolder(), fileName);
-            YamlConfiguration database = YamlConfiguration.loadConfiguration(database_file);
+            File file = new File(plugin.getDataFolder(), fileName);
+            YamlConfiguration yaml = YamlConfiguration.loadConfiguration(file);
 
-            database.set(key, value);
+            yaml.set(key, value);
 
             try {
-                database.save(database_file);
+                yaml.save(file);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -44,18 +44,22 @@ public class FileManager {
     }
 
     @SneakyThrows
-    public Object getDataInDatabase(String fileName, String key) {
-        File database_file = new File(plugin.getDataFolder(), fileName);
-        YamlConfiguration database = YamlConfiguration.loadConfiguration(database_file);
+    public Object getDataInFile(String fileName, String key) {
+        File file = new File(plugin.getDataFolder(), fileName);
+        YamlConfiguration yaml = YamlConfiguration.loadConfiguration(file);
 
-        return database.get(key);
+        return yaml.get(key);
     }
 
-    public List<Object> getListDataInDatabase(String fileName, String key) {
-        File database_file = new File(plugin.getDataFolder(), fileName);
-        YamlConfiguration database = YamlConfiguration.loadConfiguration(database_file);
+    public Set<String> getListDataInFile(String fileName, String key) {
+        File file = new File(plugin.getDataFolder(), fileName);
+        YamlConfiguration yaml = YamlConfiguration.loadConfiguration(file);
 
-        return Collections.singletonList(database.getConfigurationSection(key).getKeys(false));
+        return Objects.requireNonNull(yaml.getConfigurationSection(key)).getKeys(false);
+    }
+
+    public Boolean isDataInFileExist(String fileName, String key) {
+        return getDataInFile(fileName, key) != null;
     }
 
 }

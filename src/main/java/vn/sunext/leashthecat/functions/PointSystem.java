@@ -13,24 +13,25 @@ public class PointSystem {
 
     public void addPoint(Player player, Integer amount) {
         String playerName = player.getName();
-        Integer currentPoint = (Integer) fileManager.getDataInDatabase("database.yml", "list." + playerName);
+        Integer currentPoint = (Integer) fileManager.getDataInFile("database.yml", "list." + playerName);
         Integer nextPoint = currentPoint + amount;
 
         AddPointEvent addPointEvent = new AddPointEvent(player, currentPoint, nextPoint);
         plugin.callEvent(addPointEvent);
 
-        fileManager.setDataInDatabase("database.yml", "list." + playerName, nextPoint);
+        fileManager.setDataInFile("database.yml", "list." + playerName, nextPoint);
     }
 
     public Integer getCurrentPoint(String playerName) {
-        return (Integer) fileManager.getDataInDatabase("database.yml", "list." + playerName);
+        return (Integer) fileManager.getDataInFile("database.yml", "list." + playerName);
     }
 
     public void setZeroPointOnFirstJoin(Player player) {
-        if (player.hasPlayedBefore()) return;
-
         String playerName = player.getName();
-        fileManager.setDataInDatabase("database.yml", "list." + playerName, 0);
+
+        if (fileManager.isDataInFileExist("database.yml", "list." + playerName)) return;
+
+        fileManager.setDataInFile("database.yml", "list." + playerName, 0);
     }
 
 }

@@ -18,14 +18,14 @@ drop-percent:
 items:
   leash-cat:
     name: "Leash The Cat"
-    material: "LEAD"
+    material: "LEASH"
     glow: true
     lore:
       - ""
       - "&eRight-click the cat to get cat point!"
   leash-material:
     name: "Leash Material"
-    material: "String"
+    material: "STRING"
     glow: true
     lore:
       - ""
@@ -35,5 +35,7 @@ items:
 messages:
   no-permission: "&cYou are not allowed to do this."
   reloaded: "&aAll configuration has been reloaded."
-  firstTopOne: "&b{new-1st-name} &7is the first one who get &e1st place&7!"
-  newTopOne: "&b{new-1st-name} &7just &csmashed &7{old-1st-name} and get the &e1st place&7!"
+  refresh: "&aThe top has ben refreshed."
+  received-point: "&aYou just received {amount} points! Keep it up!"
+  first-top-one: "&b{new-1st-name} &7is the first one who get &e1st place&7!"
+  new-top-one: "&b{new-1st-name} &7just &csmashed &7{old-1st-name} and get the &e1st place&7!"

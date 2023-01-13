@@ -12,9 +12,6 @@ public class PlaceholderAPI extends PlaceholderExpansion {
 
     private final LeashTheCat plugin = LeashTheCat.getInstance();
 
-    private final TopManager topManager = plugin.getTopManager();
-    private final PointSystem pointSystem = plugin.getPointSystem();
-
     @Override
     public @NotNull String getIdentifier() {
         return "leashthecat";
@@ -33,7 +30,7 @@ public class PlaceholderAPI extends PlaceholderExpansion {
     @Override
     public String onPlaceholderRequest(Player player, @NotNull String identifier) {
         if (identifier.equals("me")) {
-            return pointSystem.getCurrentPoint(player.getName()).toString();
+            return plugin.getPointSystem().getCurrentPoint(player.getName()).toString();
         }
 
         int increaseForExactForLoop = PathManager.TOP_AMOUNT + 1;
@@ -41,12 +38,27 @@ public class PlaceholderAPI extends PlaceholderExpansion {
         for (int i = 1; i < increaseForExactForLoop; ++i) {
             if (identifier.equals("top_" + i + "_name")) {
                 int decreaseForExactIndex = i - 1;
-                return topManager.getTopList().get(decreaseForExactIndex).getPlayerName();
+
+                try {
+                    plugin.getTopManager().getTopList().get(decreaseForExactIndex);
+                } catch (IndexOutOfBoundsException ignored) {
+                    return "Unknown";
+                }
+
+
+                return plugin.getTopManager().getTopList().get(decreaseForExactIndex).getPlayerName();
             }
 
             if (identifier.equals("top_" + i + "_points")) {
                 int decreaseForExactIndex = i - 1;
-                return topManager.getTopList().get(decreaseForExactIndex).getPoints().toString();
+
+                try {
+                    plugin.getTopManager().getTopList().get(decreaseForExactIndex);
+                } catch (IndexOutOfBoundsException ignored) {
+                    return "Unknown";
+                }
+
+                return plugin.getTopManager().getTopList().get(decreaseForExactIndex).getPoints().toString();
             }
         }
 

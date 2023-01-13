@@ -42,6 +42,8 @@ public final class LeashTheCat extends JavaPlugin {
 
         saveDefaultConfig();
 
+        colorSystem = new ColorSystem();
+
         pathManager = new PathManager();
         pathManager.register();
 
@@ -54,17 +56,16 @@ public final class LeashTheCat extends JavaPlugin {
         fileManager = new FileManager();
         fileManager.register();
 
-        topManager = new TopManager();
-        topManager.register();
-
-        colorSystem = new ColorSystem();
         dropSystem = new DropSystem();
         monsterSystem = new MonsterSystem();
         inventorySystem = new InventorySystem();
-        leashSystem = new LeashSystem();
         pointSystem = new PointSystem();
+        leashSystem = new LeashSystem();
         messageSystem = new MessageSystem();
         permissionSystem = new PermissionSystem();
+
+        topManager = new TopManager();
+        topManager.register();
 
         new PlaceholderAPI().register();
 

@@ -13,26 +13,27 @@ public class InventorySystem {
 
     private final ItemManager itemManager = plugin.getItemManager();
 
-    public Boolean isHoldLeashItem(Player player, EquipmentSlot equipmentSlot) {
+    public Boolean isHoldLeashItem(Player player) {
         PlayerInventory inventory = player.getInventory();
 
-        if (equipmentSlot == EquipmentSlot.HAND) {
-            return inventory.getItemInMainHand().equals(itemManager.getLeashCat());
-        } else {
-            return inventory.getItemInOffHand().equals(itemManager.getLeashCat());
-        }
+        if (inventory.getItemInMainHand().isSimilar(itemManager.getLeashCat()))
+            return true;
+
+        return inventory.getItemInOffHand().isSimilar(itemManager.getLeashCat());
     }
 
-    public void removeLeashItem(Player player, EquipmentSlot equipmentSlot) {
+    public void removeLeashItem(Player player) {
         PlayerInventory inventory = player.getInventory();
 
         ItemStack mainHand = inventory.getItemInMainHand();
         ItemStack offHand = inventory.getItemInOffHand();
 
-        if (equipmentSlot == EquipmentSlot.HAND) {
+        if (inventory.getItemInMainHand().isSimilar(itemManager.getLeashCat())) {
             mainHand.setAmount(mainHand.getAmount() - 1);
         } else {
-            offHand.setAmount(offHand.getAmount() - 1);
+            if (inventory.getItemInOffHand().isSimilar(itemManager.getLeashCat())) {
+                offHand.setAmount(mainHand.getAmount() - 1);
+            }
         }
 
         player.updateInventory();

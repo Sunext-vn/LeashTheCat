@@ -17,9 +17,17 @@ public class PointEvent implements Listener {
 
     @EventHandler
     public void onPointEvent(AddPointEvent event) {
+        if (event.isCancelled()) return;
+
         if (topManager.getTopList().isEmpty()) {
             messageSystem.broadcastMessage(PathManager.FIRST_TOP_ONE_MESSAGE.replace("{new-1st-name}", event.getPlayer().getName()));
+
+            topManager.loadTop();
         }
+
+        int resultPoint = event.getNextLeashPoints() - event.getCurrentLeashPoints();
+
+        messageSystem.sendMessage(event.getPlayer(), PathManager.RECEIVED_POINT_MESSAGE.replace("{amount}", Integer.toString(resultPoint)));
     }
 
 }

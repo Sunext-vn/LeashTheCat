@@ -32,8 +32,9 @@ public class MainCommand implements TabExecutor {
                 switch (args[0]) {
                     case "help":
                         messageSystem.sendMessage(sender, "");
-                        messageSystem.sendMessage(sender, " &f/&cleashthecat help &7- Show these help messages");
-                        messageSystem.sendMessage(sender, " &f/&cleashthecat reload &7- Reload the plugin");
+                        messageSystem.sendMessage(sender, " &f/&cleashthecat &ahelp &7- Show these help messages");
+                        messageSystem.sendMessage(sender, " &f/&cleashthecat &areload &7- Reload the plugin");
+                        messageSystem.sendMessage(sender, " &f/&cleashthecat &arefresh &7- Force refresh the top");
                         messageSystem.sendMessage(sender, "");
                         break;
                     case "reload":
@@ -41,6 +42,17 @@ public class MainCommand implements TabExecutor {
                             plugin.getPathManager().register();
 
                             messageSystem.sendPrefixMessage(sender, PathManager.RELOAD_MESSAGE);
+                        } else {
+                            messageSystem.sendPrefixMessage(sender, PathManager.NO_PERMISSION);
+                        }
+                        break;
+                    case "refresh":
+                        if (permissionSystem.isHavePermission(sender, PathManager.RELOAD_PERMISSION)) {
+                            plugin.getTopManager().loadTop();
+
+                            messageSystem.sendPrefixMessage(sender, PathManager.REFRESH_MESSAGE);
+                        } else {
+                            messageSystem.sendPrefixMessage(sender, PathManager.NO_PERMISSION);
                         }
                         break;
                 }
@@ -53,7 +65,7 @@ public class MainCommand implements TabExecutor {
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         List<String> result = new ArrayList<>();
 
-        List<String> subCommands = Arrays.asList("help", "reload");
+        List<String> subCommands = Arrays.asList("help", "reload", "refresh");
 
         switch (args.length) {
             case 1:

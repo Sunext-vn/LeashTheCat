@@ -2,6 +2,7 @@ package vn.sunext.leashthecat.listeners;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.PlayerLeashEntityEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import vn.sunext.leashthecat.LeashTheCat;
 
@@ -11,6 +12,11 @@ public class LeashEvent implements Listener {
 
     @EventHandler
     public void onLeashEntity(PlayerInteractAtEntityEvent event) {
+        plugin.getLeashSystem().onLeashCat(event);
+    }
+
+    @EventHandler
+    public void onLeashEntity(PlayerLeashEntityEvent event) {
         plugin.getLeashSystem().onLeashCat(event);
     }
 
