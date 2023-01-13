@@ -14,6 +14,7 @@ public class PathManager {
     public static String PREFIX = "";
 
     public static String RELOAD_PERMISSION = "";
+    public static String REFRESH_PERMISSION = "";
     public static String ADMIN_PERMISSION = "";
 
     public static Boolean ALLOW_OP = false;
@@ -51,6 +52,7 @@ public class PathManager {
         PREFIX = config.getString("prefix");
 
         RELOAD_PERMISSION = config.getString("permissions.reload");
+        REFRESH_PERMISSION = config.getString("permissions.  refresh");
         ADMIN_PERMISSION = config.getString("permissions.admin");
 
         ALLOW_OP = config.getBoolean("options.allow-op");
