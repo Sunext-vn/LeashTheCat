@@ -15,7 +15,7 @@ public class DropSystem {
     public Boolean canDropLeashMaterial() {
         int rate = randomRate();
 
-        return rate <= PathManager.LEASH_CAT_DROP_PERCENT;
+        return rate <= PathManager.LEASH_MATERIAL_DROP_PERCENT;
     }
 
     private Integer randomRate() {
