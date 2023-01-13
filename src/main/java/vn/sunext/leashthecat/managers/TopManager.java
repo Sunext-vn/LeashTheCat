@@ -1,0 +1,70 @@
+package vn.sunext.leashthecat.managers;
+
+import lombok.Getter;
+import lombok.Setter;
+import org.bukkit.Bukkit;
+import vn.sunext.leashthecat.LeashTheCat;
+import vn.sunext.leashthecat.constructors.LeashPoint;
+import vn.sunext.leashthecat.functions.MessageSystem;
+import vn.sunext.leashthecat.functions.PointSystem;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Setter
+@Getter
+public class TopManager {
+
+    private final LeashTheCat plugin = LeashTheCat.getInstance();
+
+    private final FileManager fileManager = plugin.getFileManager();
+    private final PointSystem pointSystem = plugin.getPointSystem();
+    private final MessageSystem messageSystem = plugin.getMessageSystem();
+
+    private List<LeashPoint> topList = new ArrayList<>();
+
+    private List<LeashPoint> temporaryPointData = new ArrayList<>();
+
+    public void register() {
+        loadTop();
+
+        autoRefreshTopList();
+    }
+
+    private void loadTop() {
+        for (Object playerObject : fileManager.getListDataInDatabase("database.yml", "list")) {
+            String playerName = playerObject.toString();
+            Integer points = pointSystem.getCurrentPoint(playerName);
+
+            if (points != 0)
+                temporaryPointData.add(new LeashPoint(playerName, points));
+        }
+
+        if (temporaryPointData.isEmpty())
+            return;
+
+        temporaryPointData.sort(Collections.reverseOrder());
+
+        List<LeashPoint> limitPointData = temporaryPointData.stream().limit(PathManager.TOP_AMOUNT).collect(Collectors.toList());
+
+        if (isNewTopOne(limitPointData.get(0)))
+            messageSystem.broadcastMessage(PathManager.NEW_TOP_ONE_MESSAGE
+                    .replace("{new-1st-name}", limitPointData.get(0).getPlayerName())
+                    .replace("old-1st-name", topList.get(0).getPlayerName()));
+
+        topList.addAll(limitPointData);
+    }
+
+    private Boolean isNewTopOne(LeashPoint leashPoint) {
+        if (topList.isEmpty()) return false;
+
+        return leashPoint.getPlayerName().equalsIgnoreCase(topList.get(0).getPlayerName());
+    }
+
+    private void autoRefreshTopList() {
+        Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, this::loadTop, PathManager.TOP_REFRESH_INTERVAL, PathManager.TOP_REFRESH_INTERVAL);
+    }
+
+}

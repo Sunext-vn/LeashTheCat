@@ -1,0 +1,39 @@
+prefix: "&7[&cLeashTheCat&7]&r "
+
+permissions:
+  reload: "leashthecat.reload"
+  admin: "leashthecat.admin" # Get all permissions
+
+options:
+    allow-op: true # Use commands without permissions
+    # Refresh the top values of placeholders
+    # Using seconds
+    top-refresh-interval: 300
+    top-amount: 10
+
+drop-percent:
+  leash-cat: 1
+  leash-material: 10
+
+items:
+  leash-cat:
+    name: "Leash The Cat"
+    material: "LEAD"
+    glow: true
+    lore:
+      - ""
+      - "&eRight-click the cat to get cat point!"
+  leash-material:
+    name: "Leash Material"
+    material: "String"
+    glow: true
+    lore:
+      - ""
+      - "&7Put &b9 &eLeash Material &7to"
+      - "&7CraftingTable to craft."
+
+messages:
+  no-permission: "&cYou are not allowed to do this."
+  reloaded: "&aAll configuration has been reloaded."
+  firstTopOne: "&b{new-1st-name} &7is the first one who get &e1st place&7!"
+  newTopOne: "&b{new-1st-name} &7just &csmashed &7{old-1st-name} and get the &e1st place&7!"

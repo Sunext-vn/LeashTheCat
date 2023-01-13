@@ -1,0 +1,14 @@
+name: LeashTheCat
+version: '${project.version}'
+main: vn.sunext.leashthecat.LeashTheCat
+api-version: 1.19
+authors: [ sunext_team, adselvn ]
+website: https://github.com/Sunext-vn
+
+commands:
+  leashthecat:
+    aliases:
+      - ltc
+      - lthecat
+      - catchthecat
+      - ctc
