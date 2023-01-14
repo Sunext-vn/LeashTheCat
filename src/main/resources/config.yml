@@ -6,11 +6,15 @@ permissions:
   admin: "leashthecat.admin" # Get all permissions
 
 options:
-    allow-op: true # Use commands without permissions
-    # Refresh the top values of placeholders
-    # Using seconds
-    top-refresh-interval: 300
-    top-amount: 10
+  # true: Only drop items when player kill
+  # false: Drop all time
+  must-be-player-kill: true
+  # Use commands without permissions
+  allow-op: true
+  # Refresh the top values of placeholders
+  # Using seconds
+  top-refresh-interval: 300
+  top-amount: 10
 
 drop-percent:
   leash-cat: 1
