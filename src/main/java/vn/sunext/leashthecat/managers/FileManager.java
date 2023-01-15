@@ -26,21 +26,14 @@ public class FileManager {
             file.createNewFile();
     }
 
+    @SneakyThrows
     public void setDataInFile(String fileName, String key, Object value) {
-        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+        File file = new File(plugin.getDataFolder(), fileName);
+        YamlConfiguration yaml = YamlConfiguration.loadConfiguration(file);
 
-            File file = new File(plugin.getDataFolder(), fileName);
-            YamlConfiguration yaml = YamlConfiguration.loadConfiguration(file);
+        yaml.set(key, value);
 
-            yaml.set(key, value);
-
-            try {
-                yaml.save(file);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-        });
+        yaml.save(file);
     }
 
     @SneakyThrows
