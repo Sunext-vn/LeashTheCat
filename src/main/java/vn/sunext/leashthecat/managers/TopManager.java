@@ -2,14 +2,10 @@ package vn.sunext.leashthecat.managers;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.bukkit.Bukkit;
-import org.bukkit.configuration.file.YamlConfiguration;
 import vn.sunext.leashthecat.LeashTheCat;
 import vn.sunext.leashthecat.constructors.LeashPoint;
 import vn.sunext.leashthecat.functions.MessageSystem;
-import vn.sunext.leashthecat.functions.PointSystem;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -39,7 +35,7 @@ public class TopManager {
         List<LeashPoint> temporaryPointData = new ArrayList<>();
 
         for (String playerName : fileManager.getListDataInFile("database.yml", "list")) {
-            Integer points = plugin.getPointSystem().getCurrentPoint(playerName);
+            Integer points = (Integer) plugin.getFileManager().getDataInFile("database.yml", "list." + playerName);
 
             if (points != 0)
                 temporaryPointData.add(new LeashPoint(playerName, points));
@@ -62,6 +58,12 @@ public class TopManager {
         topList.addAll(limitPointData);
     }
 
+    public void forceRefreshTop() {
+        plugin.getDataSystem().saveAllTempData(false);
+
+        loadTop();
+    }
+
     private Boolean isNewTopOne(LeashPoint leashPoint) {
         if (topList.isEmpty()) return false;
 
@@ -69,7 +71,7 @@ public class TopManager {
     }
 
     private void autoRefreshTopList() {
-        Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, this::loadTop, PathManager.TOP_REFRESH_INTERVAL * 20L, PathManager.TOP_REFRESH_INTERVAL * 20L);
+        plugin.getTimerTask().refreshTop();
     }
 
 }

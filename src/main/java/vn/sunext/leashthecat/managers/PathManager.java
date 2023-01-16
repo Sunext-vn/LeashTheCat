@@ -42,6 +42,7 @@ public class PathManager {
     public static String RECEIVED_POINT_MESSAGE = "";
     public static String FIRST_TOP_ONE_MESSAGE = "";
     public static String NEW_TOP_ONE_MESSAGE = "";
+    public static String NOT_AN_OCELOT = "";
 
     public void register() {
         File config_file = new File(plugin.getDataFolder(), "config.yml");
@@ -82,6 +83,7 @@ public class PathManager {
         RECEIVED_POINT_MESSAGE = config.getString("messages.received-point");
         FIRST_TOP_ONE_MESSAGE = config.getString("messages.first-top-one");
         NEW_TOP_ONE_MESSAGE = config.getString("messages.new-top-one");
+        NOT_AN_OCELOT = config.getString("messages.not-an-ocelot");
     }
 
 }

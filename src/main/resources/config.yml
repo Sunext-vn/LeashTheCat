@@ -44,3 +44,4 @@ messages:
   received-point: "&aYou just received {amount} points! Keep it up!"
   first-top-one: "&b{new-1st-name} &7is the first one who get &e1st place&7!"
   new-top-one: "&b{new-1st-name} &7just &csmashed &7{old-1st-name} and get the &e1st place&7!"
+  not-an-ocelot: "&cThat's not an ocelot!"

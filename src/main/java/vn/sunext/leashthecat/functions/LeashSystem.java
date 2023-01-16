@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.PlayerLeashEntityEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import vn.sunext.leashthecat.LeashTheCat;
+import vn.sunext.leashthecat.managers.PathManager;
 
 public class LeashSystem {
 
@@ -12,6 +13,7 @@ public class LeashSystem {
 
     private final InventorySystem inventorySystem = plugin.getInventorySystem();
     private final PointSystem pointSystem = plugin.getPointSystem();
+    private final MessageSystem messageSystem = plugin.getMessageSystem();
 
     public void onLeashCat(PlayerInteractAtEntityEvent event) {
         Player player = event.getPlayer();
@@ -31,6 +33,15 @@ public class LeashSystem {
         if (event.getEntity() instanceof Ocelot)
             if (inventorySystem.isHoldLeashItem(player))
                 event.setCancelled(true);
+
+        if (inventorySystem.isHoldLeashItem(player)) {
+
+            event.setCancelled(true);
+
+            if (!(event.getEntity() instanceof Ocelot))
+                messageSystem.sendPrefixMessage(player, PathManager.NOT_AN_OCELOT);
+
+        }
     }
 
 }

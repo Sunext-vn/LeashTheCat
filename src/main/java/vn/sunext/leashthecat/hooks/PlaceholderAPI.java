@@ -30,7 +30,7 @@ public class PlaceholderAPI extends PlaceholderExpansion {
     @Override
     public String onPlaceholderRequest(Player player, @NotNull String identifier) {
         if (identifier.equals("me")) {
-            return plugin.getPointSystem().getCurrentPoint(player.getName()).toString();
+            return plugin.getDataSystem().getValueTempData(player.getName()).toString();
         }
 
         int increaseForExactForLoop = PathManager.TOP_AMOUNT + 1;

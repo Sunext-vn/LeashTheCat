@@ -26,10 +26,17 @@ public class FileManager {
             file.createNewFile();
     }
 
+    /*
+    * @saveSaving when it true, null value will not be saved.
+    */
     @SneakyThrows
-    public void setDataInFile(String fileName, String key, Object value) {
+    public void setDataInFile(String fileName, String key, Object value, Boolean safeSaving) {
         File file = new File(plugin.getDataFolder(), fileName);
         YamlConfiguration yaml = YamlConfiguration.loadConfiguration(file);
+
+        if (safeSaving)
+            if (value == null)
+                return;
 
         yaml.set(key, value);
 

@@ -49,7 +49,7 @@ public class MainCommand implements TabExecutor {
                         break;
                     case "refresh":
                         if (permissionSystem.isHavePermission(sender, PathManager.REFRESH_PERMISSION)) {
-                            plugin.getTopManager().loadTop();
+                            plugin.getTopManager().forceRefreshTop();
 
                             messageSystem.sendPrefixMessage(sender, PathManager.REFRESH_MESSAGE);
                         } else {

@@ -19,10 +19,12 @@ public class PointEvent implements Listener {
     public void onPointEvent(AddPointEvent event) {
         if (event.isCancelled()) return;
 
+        plugin.getDataSystem().setValueTempData(event.getPlayer().getName(), event.getNextLeashPoints());
+
         if (topManager.getTopList().isEmpty()) {
             messageSystem.broadcastMessage(PathManager.FIRST_TOP_ONE_MESSAGE.replace("{new-1st-name}", event.getPlayer().getName()));
 
-            topManager.loadTop();
+            topManager.forceRefreshTop();
         }
 
         int resultPoint = event.getNextLeashPoints() - event.getCurrentLeashPoints();

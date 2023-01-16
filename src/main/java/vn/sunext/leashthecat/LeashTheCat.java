@@ -8,11 +8,9 @@ import vn.sunext.leashthecat.commands.MainCommand;
 import vn.sunext.leashthecat.events.AddPointEvent;
 import vn.sunext.leashthecat.functions.*;
 import vn.sunext.leashthecat.hooks.PlaceholderAPI;
-import vn.sunext.leashthecat.listeners.JoinEvent;
-import vn.sunext.leashthecat.listeners.LeashEvent;
-import vn.sunext.leashthecat.listeners.MonsterKillEvent;
-import vn.sunext.leashthecat.listeners.PointEvent;
+import vn.sunext.leashthecat.listeners.*;
 import vn.sunext.leashthecat.managers.*;
+import vn.sunext.leashthecat.schedulers.TimerTask;
 
 import java.util.Objects;
 
@@ -35,6 +33,9 @@ public final class LeashTheCat extends JavaPlugin {
     private PointSystem pointSystem;
     private MessageSystem messageSystem;
     private PermissionSystem permissionSystem;
+    private DataSystem dataSystem;
+
+    private TimerTask timerTask;
 
     @Override
     public void onEnable() {
@@ -56,13 +57,16 @@ public final class LeashTheCat extends JavaPlugin {
         fileManager = new FileManager();
         fileManager.register();
 
+        timerTask = new TimerTask();
+
+        messageSystem = new MessageSystem();
         dropSystem = new DropSystem();
         monsterSystem = new MonsterSystem();
         inventorySystem = new InventorySystem();
         pointSystem = new PointSystem();
         leashSystem = new LeashSystem();
-        messageSystem = new MessageSystem();
         permissionSystem = new PermissionSystem();
+        dataSystem = new DataSystem();
 
         topManager = new TopManager();
         topManager.register();
@@ -74,10 +78,16 @@ public final class LeashTheCat extends JavaPlugin {
         Objects.requireNonNull(getCommand("leashthecat")).setExecutor(new MainCommand());
     }
 
+    @Override
+    public void onDisable() {
+        dataSystem.saveAllTempData(true);
+    }
+
     private void registerEvents() {
         shortRegEvent(new MonsterKillEvent());
         shortRegEvent(new LeashEvent());
         shortRegEvent(new JoinEvent());
+        shortRegEvent(new QuitEvent());
         shortRegEvent(new PointEvent());
     }
 
