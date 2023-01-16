@@ -15,9 +15,13 @@ public class DataSystem {
     private final Map<String, Integer> tempPlayerData = new HashMap<>();
 
     public void addTempDataOnJoin(PlayerJoinEvent event) {
-        FileManager fileManager = plugin.getFileManager();
-
         String playerName = event.getPlayer().getName();
+
+        addTempData(playerName);
+    }
+
+    private void addTempData(String playerName) {
+        FileManager fileManager = plugin.getFileManager();
 
         if (!hasData(playerName))
             addNewData(playerName);
@@ -37,10 +41,16 @@ public class DataSystem {
     }
 
     public void setValueTempData(String playerName, Integer value) {
+        if (!tempPlayerData.containsKey(playerName))
+            addTempData(playerName);
+
         tempPlayerData.put(playerName, value);
     }
 
     public Integer getValueTempData(String playerName) {
+        if (!tempPlayerData.containsKey(playerName))
+            addTempData(playerName);
+
         return tempPlayerData.get(playerName);
     }
 
