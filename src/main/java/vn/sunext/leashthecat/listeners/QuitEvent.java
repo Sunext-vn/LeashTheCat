@@ -11,7 +11,7 @@ public class QuitEvent implements Listener {
 
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
-        plugin.getDataSystem().removeTempDataOnQuit(event);
+        plugin.getDataSystem().saveTempDataOnQuit(event);
     }
 
 }

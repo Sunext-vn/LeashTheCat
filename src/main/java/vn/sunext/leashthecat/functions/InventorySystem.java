@@ -1,7 +1,6 @@
 package vn.sunext.leashthecat.functions;
 
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import vn.sunext.leashthecat.LeashTheCat;

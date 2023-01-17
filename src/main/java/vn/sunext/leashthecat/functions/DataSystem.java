@@ -34,7 +34,7 @@ public class DataSystem {
         tempPlayerData.put(playerName, points);
     }
 
-    public void removeTempDataOnQuit(PlayerQuitEvent event) {
+    public void saveTempDataOnQuit(PlayerQuitEvent event) {
         String playerName = event.getPlayer().getName();
 
         saveTempData(playerName);

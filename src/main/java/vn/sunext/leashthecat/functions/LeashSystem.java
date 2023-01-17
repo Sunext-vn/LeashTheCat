@@ -30,10 +30,6 @@ public class LeashSystem {
     public void onLeashCat(PlayerLeashEntityEvent event) {
         Player player = event.getPlayer();
 
-        if (event.getEntity() instanceof Ocelot)
-            if (inventorySystem.isHoldLeashItem(player))
-                event.setCancelled(true);
-
         if (inventorySystem.isHoldLeashItem(player)) {
 
             event.setCancelled(true);

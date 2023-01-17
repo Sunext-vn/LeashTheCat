@@ -5,7 +5,6 @@ import org.bukkit.event.Event;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import vn.sunext.leashthecat.commands.MainCommand;
-import vn.sunext.leashthecat.events.AddPointEvent;
 import vn.sunext.leashthecat.functions.*;
 import vn.sunext.leashthecat.hooks.PlaceholderAPI;
 import vn.sunext.leashthecat.listeners.*;
