@@ -17,6 +17,14 @@
     </properties>
     <url>https://github.com/Sunext-vn</url>
 
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/Sunext-vn/LeashTheCat</url>
+        </repository>
+    </distributionManagement>
+
     <build>
         <plugins>
             <plugin>
