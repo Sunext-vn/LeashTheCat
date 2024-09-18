@@ -4,14 +4,15 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
+import lombok.SneakyThrows;
+import org.bukkit.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 
 public class ShapedRegister {
 
-    private ItemStack output;
+    private final NamespacedKey key;
+    private final ItemStack output;
     private String[] rows;
     private Map<Character, ItemStack> ingredients = new HashMap<>();
 
@@ -25,8 +26,9 @@ public class ShapedRegister {
      * @see ShapedRecipe#shape(String...)
      * @see ShapedRecipe#setIngredient(char, Material)
      */
-    public ShapedRegister(ItemStack result) {
-        output = new ItemStack(result);
+    public ShapedRegister(NamespacedKey key, ItemStack result) {
+        this.key = key;
+        this.output = new ItemStack(result);
     }
 
     /**
@@ -85,17 +87,15 @@ public class ShapedRegister {
     /**
      * Registers the Recipe in the server.
      */
+    @SneakyThrows
     public void register() {
-        ShapedRecipe sr = new ShapedRecipe(output);
+        ShapedRecipe sr = new ShapedRecipe(key, output);
         sr.shape(rows);
-        try {
-            Field f = sr.getClass().getDeclaredField("ingredients");
-            f.setAccessible(true);
-            f.set(sr, ingredients);
-            Bukkit.addRecipe(sr);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+        Field f = sr.getClass().getDeclaredField("ingredients");
+        f.setAccessible(true);
+        f.set(sr, ingredients);
+        Bukkit.addRecipe(sr);
     }
 
 }

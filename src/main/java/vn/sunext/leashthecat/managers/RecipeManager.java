@@ -1,5 +1,6 @@
 package vn.sunext.leashthecat.managers;
 
+import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import vn.sunext.leashthecat.LeashTheCat;
 import vn.sunext.leashthecat.modules.ShapedRegister;
@@ -15,7 +16,7 @@ public class RecipeManager {
     }
 
     private void createNewRecipe(ItemStack resultItem, ItemStack ingredient) {
-        ShapedRegister recipe = new ShapedRegister(resultItem);
+        ShapedRegister recipe = new ShapedRegister(new NamespacedKey(plugin, "leashthecat"), resultItem);
 
         recipe.shape("MMM", "MMM", "MMM");
 
