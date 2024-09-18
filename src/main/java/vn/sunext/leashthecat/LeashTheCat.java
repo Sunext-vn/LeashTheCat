@@ -20,7 +20,6 @@ public final class LeashTheCat extends JavaPlugin {
 
     private PathManager pathManager;
     private ItemManager itemManager;
-    private RecipeManager recipeManager;
     private FileManager fileManager;
     private TopManager topManager;
 
@@ -50,8 +49,6 @@ public final class LeashTheCat extends JavaPlugin {
         itemManager = new ItemManager();
         itemManager.register();
 
-        recipeManager = new RecipeManager();
-        recipeManager.register();
 
         fileManager = new FileManager();
         fileManager.register();
@@ -88,6 +85,7 @@ public final class LeashTheCat extends JavaPlugin {
         shortRegEvent(new JoinEvent());
         shortRegEvent(new QuitEvent());
         shortRegEvent(new PointEvent());
+        shortRegEvent(new CraftingEvent());
     }
 
     private void shortRegEvent(Listener listener) {

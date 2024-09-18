@@ -17,20 +17,12 @@
     </properties>
     <url>https://github.com/Sunext-vn</url>
 
-    <distributionManagement>
-        <repository>
-            <id>github</id>
-            <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/Sunext-vn/LeashTheCat</url>
-        </repository>
-    </distributionManagement>
-
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
+                <version>3.8.1</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
@@ -39,7 +31,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.5.0</version>
+                <version>3.2.4</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -74,33 +66,25 @@
             <id>placeholderapi</id>
             <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
         </repository>
-        <repository>
-            <id>papermc-repo</id>
-            <url>https://repo.papermc.io/repository/maven-public/</url>
-        </repository>
-        <repository>
-            <id>destroystokyo-repo</id>
-            <url>https://repo.destroystokyo.com/repository/maven-public/</url>
-        </repository>
     </repositories>
 
     <dependencies>
         <dependency>
-            <groupId>com.destroystokyo.paper</groupId>
-            <artifactId>paper-api</artifactId>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot-api</artifactId>
             <version>1.12.2-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.28</version>
+            <version>1.18.24</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>me.clip</groupId>
             <artifactId>placeholderapi</artifactId>
-            <version>2.11.3</version>
+            <version>2.11.2</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
