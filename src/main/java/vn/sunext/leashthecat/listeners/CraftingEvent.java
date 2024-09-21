@@ -20,7 +20,7 @@ public class CraftingEvent implements Listener {
         ItemStack[] matrix = event.getInventory().getMatrix();
 
         for (int i = 0; i < 9; i++) {
-            if (matrix[i] == null || !matrix[i].equals(itemManager.getLeashMaterial()))
+            if (matrix[i] == null || !matrix[i].isSimilar(itemManager.getLeashMaterial()))
                 return;
         }
 
